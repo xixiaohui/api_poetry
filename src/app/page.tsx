@@ -75,7 +75,7 @@ export default function Home() {
           中国古诗词 API 统一网关服务。聚合海量诗词数据，提供 AI 智能赏析，
           所有客户端（Flutter / Web / 小程序）的唯一后端入口。
         </p>
-        <div className="flex gap-4 justify-center mt-10">
+        <div className="flex gap-4 justify-center mt-10 flex-wrap">
           <Link
             href="/docs"
             className="inline-flex items-center gap-2 rounded-xl bg-amber-600 px-6 py-3 text-white font-medium hover:bg-amber-700 transition-colors shadow-sm"
@@ -83,16 +83,50 @@ export default function Home() {
             API 文档
             <span className="text-amber-200">→</span>
           </Link>
-          <a
-            href="https://github.com/chinese-poetry/chinese-poetry"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/playground"
+            className="inline-flex items-center gap-2 rounded-xl bg-zinc-800 dark:bg-zinc-700 px-6 py-3 text-white font-medium hover:bg-zinc-700 dark:hover:bg-zinc-600 transition-colors shadow-sm"
+          >
+            API Playground
+            <span className="text-zinc-400">→</span>
+          </Link>
+          <Link
+            href="/browse"
             className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-6 py-3 text-zinc-700 dark:text-zinc-300 font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
           >
-            数据来源
-          </a>
+            诗词浏览
+          </Link>
+          <Link
+            href="/random"
+            className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-6 py-3 text-zinc-700 dark:text-zinc-300 font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          >
+            随机漫步
+          </Link>
         </div>
       </header>
+
+      {/* Quick Links */}
+      <section className="max-w-5xl mx-auto px-6 pb-4">
+        <div className="flex flex-wrap justify-center gap-3">
+          {[
+            { href: "/browse", icon: "🔍", label: "诗词浏览" },
+            { href: "/random", icon: "🎲", label: "随机漫步" },
+            { href: "/today", icon: "📅", label: "今日诗词" },
+            { href: "/playground", icon: "🛠", label: "Playground" },
+            { href: "/status", icon: "📊", label: "服务状态" },
+            { href: "/getting-started", icon: "🚀", label: "快速开始" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 px-4 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:border-amber-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors bg-white dark:bg-zinc-900"
+            >
+              <span>{link.icon}</span>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Features */}
       <section className="max-w-5xl mx-auto px-6 py-20">

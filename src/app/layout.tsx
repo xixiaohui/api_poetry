@@ -41,7 +41,7 @@ export default function RootLayout({
             >
               Poetry Gateway
             </Link>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-5">
               <Link
                 href="/"
                 className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
@@ -52,16 +52,20 @@ export default function RootLayout({
                 href="/docs"
                 className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
               >
-                API 文档
+                文档
               </Link>
-              <a
-                href="https://github.com/chinese-poetry/chinese-poetry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors"
+              <Link
+                href="/playground"
+                className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
               >
-                数据源 ↗
-              </a>
+                Playground
+              </Link>
+              <Link
+                href="/getting-started"
+                className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              >
+                接入
+              </Link>
             </div>
           </div>
         </nav>
