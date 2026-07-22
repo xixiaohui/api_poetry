@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Footer } from "@/components/footer";
 
 const features = [
   {
@@ -115,6 +114,9 @@ export default function Home() {
             { href: "/today", icon: "📅", label: "今日诗词" },
             { href: "/playground", icon: "🛠", label: "Playground" },
             { href: "/status", icon: "📊", label: "服务状态" },
+            { href: "/search", icon: "🔎", label: "诗词搜索" },
+            { href: "/changelog", icon: "📋", label: "更新日志" },
+            { href: "/about", icon: "📖", label: "关于项目" },
             { href: "/getting-started", icon: "🚀", label: "快速开始" },
           ].map((link) => (
             <Link
@@ -252,7 +254,6 @@ Chinese Poetry API   AI Service      User Service
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

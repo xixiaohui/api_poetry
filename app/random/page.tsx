@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { Footer } from "@/components/footer";
 
 interface PoemDTO {
   readonly id: number;
@@ -49,12 +47,9 @@ export default function RandomPage() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white dark:from-zinc-950 dark:to-zinc-900">
+    <div className="">
       <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur">
         <div className="max-w-3xl mx-auto px-6 py-6">
-          <Link href="/" className="text-amber-600 dark:text-amber-400 hover:underline text-sm">
-            ← 返回首页
-          </Link>
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">
             随机漫步
           </h1>
@@ -116,8 +111,7 @@ export default function RandomPage() {
               {poem.content.split("\n").map((line, i) => (
                 <p
                   key={i}
-                  className="text-xl md:text-2xl leading-loose text-zinc-800 dark:text-zinc-200 tracking-wider"
-                  style={{ fontFamily: "'Noto Serif SC', 'Songti SC', serif" }}
+                  className="text-xl md:text-2xl leading-loose text-zinc-800 dark:text-zinc-200 tracking-wider font-serif"
                 >
                   {line || " "}
                 </p>
@@ -142,7 +136,6 @@ export default function RandomPage() {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 }

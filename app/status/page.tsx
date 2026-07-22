@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { Footer } from "@/components/footer";
 
 interface ServiceCheck {
   name: string;
@@ -71,12 +69,9 @@ export default function StatusPage() {
   const allOk = okCount === checks.length;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="">
       <header className="border-b border-zinc-200 dark:border-zinc-800">
         <div className="max-w-4xl mx-auto px-6 py-6">
-          <Link href="/" className="text-amber-600 dark:text-amber-400 hover:underline text-sm">
-            ← 返回首页
-          </Link>
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">
             服务状态
           </h1>
@@ -187,7 +182,6 @@ Poems  Redis  DeepSeek  PostgreSQL
           </pre>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
