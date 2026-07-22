@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { Footer } from "@/app/components/footer";
 
 interface ServiceCheck {
   name: string;
@@ -185,6 +186,7 @@ Poems  Redis  DeepSeek  PostgreSQL
           </pre>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

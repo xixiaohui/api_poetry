@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Footer } from "@/app/components/footer";
 
 export const metadata: Metadata = {
   title: "快速开始",
@@ -261,16 +262,7 @@ const favs = await fetch(API + '/favorites', {
         </section>
       </div>
 
-      <footer className="border-t border-zinc-200 dark:border-zinc-800 mt-10">
-        <div className="max-w-4xl mx-auto px-6 py-8 text-center">
-          <Link
-            href="/"
-            className="text-amber-600 dark:text-amber-400 hover:underline text-sm"
-          >
-            ← 返回首页
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

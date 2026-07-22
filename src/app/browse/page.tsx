@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { Footer } from "@/app/components/footer";
 import { useSearchParams, useRouter } from "next/navigation";
 
 interface PoemDTO {
@@ -192,6 +193,7 @@ export default function BrowsePage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

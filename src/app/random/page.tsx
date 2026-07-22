@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { Footer } from "@/app/components/footer";
 
 interface PoemDTO {
   readonly id: number;
@@ -140,6 +141,7 @@ export default function RandomPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Footer } from "@/app/components/footer";
 
 export const metadata: Metadata = {
   title: "API 文档 — Poetry Gateway",
@@ -598,17 +599,7 @@ export default function DocsPage() {
         </section>
       ))}
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-200 dark:border-zinc-800">
-        <div className="max-w-5xl mx-auto px-6 py-10 text-center">
-          <Link
-            href="/"
-            className="text-amber-600 dark:text-amber-400 hover:underline text-sm"
-          >
-            ← 返回首页
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

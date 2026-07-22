@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import { Footer } from "@/app/components/footer";
 
 const endpoints = [
   { label: "首页聚合", method: "GET", path: "/api/v1/home", hasBody: false },
@@ -200,6 +201,7 @@ export default function PlaygroundPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
