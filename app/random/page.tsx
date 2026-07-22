@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Footer } from "@/app/components/footer";
+import { Footer } from "@/components/footer";
 
 interface PoemDTO {
   readonly id: number;

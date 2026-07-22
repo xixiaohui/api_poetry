@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
-import { Footer } from "@/app/components/footer";
+import { Footer } from "@/components/footer";
 
 const endpoints = [
   { label: "首页聚合", method: "GET", path: "/api/v1/home", hasBody: false },

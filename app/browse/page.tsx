@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Footer } from "@/app/components/footer";
+import { Footer } from "@/components/footer";
 import { useSearchParams, useRouter } from "next/navigation";
 
 interface PoemDTO {
@@ -17,7 +17,7 @@ interface PoemDTO {
 const DYNASTIES = ["唐", "宋", "元", "明", "清", "先秦", "南北朝", "五代"];
 const TYPES = ["五言绝句", "七言绝句", "五言律诗", "七言律诗", "乐府诗", "宋词", "元曲"];
 
-export default function BrowsePage() {
+function BrowseContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -195,5 +195,13 @@ export default function BrowsePage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+export default function BrowsePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-zinc-400">加载中...</div>}>
+      <BrowseContent />
+    </Suspense>
   );
 }

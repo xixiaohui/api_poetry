@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Footer } from "@/app/components/footer";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "API 文档 — Poetry Gateway",
