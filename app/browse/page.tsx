@@ -3,7 +3,7 @@
 import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface PoemDTO {
   readonly id: number;
@@ -19,7 +19,6 @@ const TYPES = ["五言绝句", "七言绝句", "五言律诗", "七言律诗", "
 
 function BrowseContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const dynasty = searchParams.get("dynasty") ?? "";
   const type = searchParams.get("type") ?? "";
@@ -56,6 +55,7 @@ function BrowseContent() {
   }, [page, dynasty, type]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
     fetchPoems();
   }, [fetchPoems]);
 

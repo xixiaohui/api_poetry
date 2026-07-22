@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { Suspense, useState, useCallback } from "react";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 
@@ -17,12 +17,7 @@ const endpoints = [
   { label: "客户端配置", method: "GET", path: "/api/v1/config", hasBody: false },
 ];
 
-const methodColors: Record<string, string> = {
-  GET: "text-green-600 dark:text-green-400",
-  POST: "text-blue-600 dark:text-blue-400",
-};
-
-export default function PlaygroundPage() {
+function PlaygroundContent() {
   const [selected, setSelected] = useState(endpoints[0]!);
   const [queryParams, setQueryParams] = useState("");
   const [body, setBody] = useState("");
@@ -67,7 +62,7 @@ export default function PlaygroundPage() {
     } finally {
       setLoading(false);
     }
-  }, [selected, queryParams, body, token, buildUrl]);
+  }, [selected, body, token, buildUrl]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
@@ -195,7 +190,7 @@ export default function PlaygroundPage() {
               </pre>
             ) : (
               <div className="flex items-center justify-center h-[400px] text-zinc-400 dark:text-zinc-600 text-sm">
-                选择端点并点击"发送请求"查看响应
+                选择端点并点击 &ldquo;发送请求&rdquo; 查看响应
               </div>
             )}
           </div>
@@ -203,5 +198,13 @@ export default function PlaygroundPage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+export default function PlaygroundPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-zinc-400">加载中...</div>}>
+      <PlaygroundContent />
+    </Suspense>
   );
 }

@@ -44,6 +44,7 @@ export default function RandomPage() {
   }, [author, dynasty]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
     fetchRandom();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

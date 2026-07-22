@@ -66,6 +66,7 @@ export default function TodayPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
     fetchToday();
   }, [fetchToday]);
 

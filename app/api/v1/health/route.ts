@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { successResponse, errorResponse } from "@/lib/response";
+import { successResponse } from "@/lib/response";
 import { config } from "@/shared/config";
 
 interface ServiceStatus {
