@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String            @id @default(uuid())
+  email          String            @unique
+  passwordHash   String
+  name           String?
+  avatar         String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  favorites      Favorite[]
+  readingHistory ReadingHistory[]
+}
+
+model Favorite {
+  id          String   @id @default(uuid())
+  userId      String
+  poemId      String
+  poemTitle   String
+  poemAuthor  String?
+  poemDynasty String?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, poemId])
+  @@index([userId])
+}
+
+model ReadingHistory {
+  id          String   @id @default(uuid())
+  userId      String
+  poemId      String
+  poemTitle   String
+  poemAuthor  String?
+  poemDynasty String?
+  readAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+}

@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  poetry-gateway:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  chinese-poetry-api:
+    image: palemoky/chinese-poetry-api:latest
+    ports:
+      - "1279:1279"
+    restart: unless-stopped
