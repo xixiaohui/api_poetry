@@ -1,6 +1,6 @@
 import { historyRepository } from "./repository";
 import { ValidationError } from "@/shared/errors";
-import type { HistoryDTO, HistoryListDTO } from "./types";
+import type { HistoryDTO, HistoryListDTO, ReadingStatsDTO } from "./types";
 
 function toHistoryDTO(h: { id: string; poemId: string; poemTitle: string; poemAuthor: string | null; poemDynasty: string | null; readAt: Date }): HistoryDTO {
   return {
@@ -28,5 +28,9 @@ export const historyService = {
     }
     const record = await historyRepository.create({ userId, poemId, poemTitle, poemAuthor, poemDynasty });
     return toHistoryDTO(record);
+  },
+
+  async stats(): Promise<ReadingStatsDTO> {
+    return historyRepository.getGlobalStats();
   },
 };

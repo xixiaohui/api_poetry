@@ -46,4 +46,27 @@ export const cache = {
       console.error("Redis del error:", (err as Error).message);
     }
   },
+
+  async getRaw(key: string): Promise<string | null> {
+    try {
+      return await getRedis().get(key);
+    } catch {
+      return null;
+    }
+  },
+
+  async incr(key: string, ttlSeconds: number): Promise<number> {
+    try {
+      const r = getRedis();
+      const val = await r.incr(key);
+      // Set expiry on first increment only (INCR creates the key)
+      if (val === 1) {
+        await r.expire(key, ttlSeconds);
+      }
+      return val;
+    } catch (err) {
+      console.error("Redis incr error:", (err as Error).message);
+      return 0;
+    }
+  },
 };

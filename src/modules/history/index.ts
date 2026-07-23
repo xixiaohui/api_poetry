@@ -1,2 +1,3 @@
 export { historyController } from "./controller";
-export type { HistoryDTO, HistoryListDTO } from "./types";
+export { historyService } from "./service";
+export type { HistoryDTO, HistoryListDTO, ReadingStatsDTO } from "./types";
