@@ -8,14 +8,23 @@ function normalizeContent(raw: unknown): string {
   return String(raw);
 }
 
+function normalizeStringField(raw: unknown): string | null {
+  if (typeof raw === "string") return raw;
+  if (raw && typeof raw === "object" && "name" in raw && typeof (raw as Record<string, unknown>).name === "string") {
+    return (raw as Record<string, unknown>).name as string;
+  }
+  if (raw == null) return null;
+  return String(raw);
+}
+
 export function toPoemDTO(poem: UpstreamPoem): PoemDTO {
   return {
     id: poem.id,
     title: poem.title,
     content: normalizeContent(poem.content),
-    author: poem.author ?? null,
-    dynasty: poem.dynasty ?? null,
-    type: poem.type ?? null,
+    author: normalizeStringField(poem.author),
+    dynasty: normalizeStringField(poem.dynasty),
+    type: normalizeStringField(poem.type),
   };
 }
 
