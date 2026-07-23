@@ -559,7 +559,7 @@ export default function DocsPage() {
           <div className="space-y-6">
             {section.endpoints.map((ep) => (
               <div
-                key={ep.path}
+                key={`${ep.method}:${ep.path}`}
                 className="rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden"
               >
                 {/* Endpoint Header */}
