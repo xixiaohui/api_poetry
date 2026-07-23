@@ -13,8 +13,23 @@ export interface ApiErrorResponse {
 
 export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;
 
+/** CORS headers applied to every API response */
+const CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+  "Access-Control-Max-Age": "86400",
+};
+
+function withCors<T>(response: NextResponse<T>): NextResponse<T> {
+  Object.entries(CORS_HEADERS).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+  return response;
+}
+
 export function successResponse<T>(data: T, status = 200): NextResponse<ApiSuccessResponse<T>> {
-  return NextResponse.json({ success: true, data }, { status });
+  return withCors(NextResponse.json({ success: true, data }, { status }));
 }
 
 export function errorResponse(
@@ -22,5 +37,10 @@ export function errorResponse(
   message: string,
   status = 500
 ): NextResponse<ApiErrorResponse> {
-  return NextResponse.json({ success: false, code, message }, { status });
+  return withCors(NextResponse.json({ success: false, code, message }, { status }));
+}
+
+/** Handle CORS preflight (OPTIONS) requests — call this for all API routes */
+export function corsPreflight(): NextResponse {
+  return withCors(NextResponse.json(null, { status: 204 }));
 }
