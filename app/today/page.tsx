@@ -39,9 +39,13 @@ export default function TodayPage() {
 
       // Then try AI analysis (may fail if no auth or AI key not configured)
       try {
+        const token = localStorage.getItem("token");
         const aiRes = await fetch("/api/v1/ai/analyse", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
           body: JSON.stringify({
             title: poemJson.data.title,
             content: poemJson.data.content,
@@ -116,7 +120,7 @@ export default function TodayPage() {
                 </h2>
               </div>
               <div className="text-center">
-                {poem.content.split(/[。！？\n]/).filter(Boolean).map((line, i) => (
+                {(poem.content ?? "").split(/[。！？\n]/).filter(Boolean).map((line, i) => (
                   <p
                     key={i}
                     className="text-xl md:text-2xl leading-loose text-zinc-800 dark:text-zinc-200 tracking-wider font-serif"

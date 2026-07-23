@@ -174,7 +174,7 @@ export default function PoemDetailPage({
           </div>
 
           <div className="text-center space-y-1">
-            {poem.content.split("\n").map((line, i) => (
+            {(poem.content ?? "").split("\n").map((line, i) => (
               <p
                 key={i}
                 className="text-xl md:text-2xl leading-loose text-zinc-800 dark:text-zinc-200 tracking-wider font-serif"
