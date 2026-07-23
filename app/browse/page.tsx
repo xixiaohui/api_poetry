@@ -42,7 +42,7 @@ function BrowseContent() {
       const json = await res.json();
       if (json.success) {
         setPoems(json.data.poems);
-        setTotal(json.data.total);
+        setTotal(json.data.total ?? 0);
       } else {
         setError(json.message);
       }
@@ -77,7 +77,7 @@ function BrowseContent() {
             诗词浏览
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 mt-1">
-            共 {total.toLocaleString()} 首 · 按朝代/体裁筛选 · 第 {page} 页
+            共 {(total ?? 0).toLocaleString()} 首 · 按朝代/体裁筛选 · 第 {page} 页
           </p>
         </div>
       </header>

@@ -132,7 +132,7 @@ function SearchContent() {
         {/* Result count */}
         {searched && !loading && !error && (
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
-            找到 {total.toLocaleString()} 条结果
+            找到 {(total ?? 0).toLocaleString()} 条结果
             {page > 1 && ` · 第 ${page} 页`}
           </p>
         )}
