@@ -64,41 +64,59 @@ const sections: { title: string; endpoints: EndpointDoc[] }[] = [
       {
         method: "GET",
         path: "/api/v1/recommend",
-        desc: "为你推荐",
+        desc: "为你推荐 — 随机翻页 + 多样化推荐理由",
         example: "curl /api/v1/recommend",
         responseExample: `{
   "success": true,
   "data": {
     "poems": [ ... ],
-    "reason": "为你精选"
+    "reason": "经典永流传"
   }
 }`,
       },
       {
         method: "GET",
         path: "/api/v1/quote",
-        desc: "每日一句：随机取一句诗词 + 出处",
+        desc: "每日一句 — 同一天返回相同诗句，带日期字段，适合 App 开屏",
         example: "curl /api/v1/quote",
         responseExample: `{
   "success": true,
   "data": {
     "content": "床前明月光，疑是地上霜",
     "author": "李白",
-    "source": "静夜思"
+    "source": "静夜思",
+    "date": "2026-07-23"
+  }
+}`,
+      },
+      {
+        method: "GET",
+        path: "/api/v1/solar-term",
+        desc: "节气推荐 — 根据当前24节气推荐应景诗词，缓存6小时",
+        example: "curl /api/v1/solar-term",
+        responseExample: `{
+  "success": true,
+  "data": {
+    "termName": "大暑",
+    "termDescription": "炎热至极，一年中最热时期，荷花盛开",
+    "poem": { "id": 42, "title": "...", "content": "...", "author": "...", "dynasty": "...", "type": "..." },
+    "reason": "今日大暑，为你精选一首夏季诗词"
   }
 }`,
       },
       {
         method: "GET",
         path: "/api/v1/config",
-        desc: "客户端配置：版本号、功能开关、Banner",
+        desc: "客户端配置：版本号、功能开关、Banner 列表（含图片/标题/跳转链接）",
         example: "curl /api/v1/config",
         responseExample: `{
   "success": true,
   "data": {
     "version": "1.0.0",
-    "bannerUrl": null,
-    "features": { "aiAnalysis": true, "aiAsk": true, "favorites": true, ... }
+    "banners": [
+      { "id": "spring", "imageUrl": "https://...", "title": "春日诗词鉴赏", "link": "/browse?dynasty=唐", "sort": 1 }
+    ],
+    "features": { "aiAnalysis": true, "aiAsk": true, "solarTerm": true, "dailyQuote": true, ... }
   }
 }`,
       },
@@ -369,6 +387,21 @@ const sections: { title: string; endpoints: EndpointDoc[] }[] = [
         example: `curl -X DELETE /api/v1/favorites/1 -H "Authorization: Bearer <token>"`,
         responseExample: `{ "success": true, "data": null }`,
       },
+      {
+        method: "GET",
+        path: "/api/v1/favorites/sync",
+        desc: "收藏同步 — 返回全部收藏 + syncToken（updatedAt 时间戳），用于多端同步",
+        auth: true,
+        example: `curl /api/v1/favorites/sync -H "Authorization: Bearer <token>"`,
+        responseExample: `{
+  "success": true,
+  "data": {
+    "favorites": [ { "id": "...", "poemId": "1", "poemTitle": "静夜思", "createdAt": "...", "updatedAt": "..." } ],
+    "syncToken": "2026-07-23T10:30:00.000Z",
+    "total": 5
+  }
+}`,
+      },
     ],
   },
   {
@@ -398,6 +431,34 @@ const sections: { title: string; endpoints: EndpointDoc[] }[] = [
   -H "Content-Type: application/json" \\
   -d '{"poemId":"1","poemTitle":"静夜思","poemAuthor":"李白"}'`,
         responseExample: `{ "success": true, "data": { "id": "...", "poemId": "1", "poemTitle": "静夜思", "readAt": "..." } }`,
+      },
+    ],
+  },
+  {
+    title: "阅读统计接口",
+    endpoints: [
+      {
+        method: "GET",
+        path: "/api/v1/stats/reading",
+        desc: "阅读统计 — 全局热门诗词/作者排行 + 近7日每日阅读量（无需认证，可做首页数据看板）",
+        example: "curl /api/v1/stats/reading",
+        responseExample: `{
+  "success": true,
+  "data": {
+    "totalReads": 12580,
+    "totalPoems": 3200,
+    "topPoems": [
+      { "poemId": "1", "poemTitle": "静夜思", "count": 523 }
+    ],
+    "topAuthors": [
+      { "author": "李白", "count": 1890 }
+    ],
+    "readsByDay": [
+      { "date": "2026-07-17", "count": 120 },
+      { "date": "2026-07-18", "count": 145 }
+    ]
+  }
+}`,
       },
     ],
   },
