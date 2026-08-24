@@ -54,4 +54,6 @@ export const RateLimitPresets = {
   ai: { maxRequests: 5, windowSeconds: 60, prefix: "ratelimit:ai" },
   /** 10 req/min for auth endpoints */
   auth: { maxRequests: 10, windowSeconds: 60, prefix: "ratelimit:auth" },
+  /** 10 req/min for poster endpoints (CPU/IO heavy) */
+  poster: { maxRequests: 10, windowSeconds: 60, prefix: "ratelimit:poster" },
 } as const satisfies Record<string, RateLimitOptions>;

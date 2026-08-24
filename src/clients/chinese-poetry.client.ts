@@ -1,5 +1,5 @@
 import { config } from "@/shared/config";
-import { UpstreamError } from "@/shared/errors";
+import { NotFoundError, UpstreamError } from "@/shared/errors";
 import { logger } from "@/shared/logger";
 
 function getBaseUrl(): string {
@@ -74,8 +74,40 @@ export const chinesePoetryClient = {
     });
   },
 
-  getPoemById(id: number): Promise<UpstreamPoem> {
-    return get<UpstreamPoem>(`/poems/${id}`);
+  /**
+   * 上游服务没有提供按 ID 查询详情或 /poems/:id 的路由（返回 404），
+   * 但列表接口 /poems 按 id 升序返回且 ID 大体连续（存在少量删除空洞）。
+   * 这里用"猜页 + 按首尾 ID 偏差跳页"的方式定位目标 ID，通常 1~2 次请求命中。
+   */
+  async getPoemById(id: number): Promise<UpstreamPoem> {
+    const PAGE_SIZE = 100;
+    let page = Math.max(1, Math.ceil(id / PAGE_SIZE));
+
+    for (let attempt = 0; attempt < 6; attempt++) {
+      const result = await get<PaginatedResponse<UpstreamPoem>>("/poems", {
+        page: page.toString(),
+        page_size: PAGE_SIZE.toString(),
+      });
+      const poems = result?.data ?? [];
+      const first = poems[0]?.id;
+      const last = poems[poems.length - 1]?.id;
+
+      if (first === undefined || last === undefined) break;
+
+      if (first <= id && id <= last) {
+        const poem = poems.find((p) => p.id === id);
+        if (poem) return poem;
+        break; // 页内没有该 ID（空洞），按不存在处理
+      }
+
+      if (id < first) {
+        page = Math.max(1, page - Math.ceil((first - id) / PAGE_SIZE));
+      } else {
+        page += Math.ceil((id - last) / PAGE_SIZE);
+      }
+    }
+
+    throw new NotFoundError(`诗词不存在 (id: ${id})`);
   },
 
   getRandomPoem(params?: { author?: string; type?: string; dynasty?: string; char?: string }): Promise<UpstreamPoem> {

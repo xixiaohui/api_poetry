@@ -143,20 +143,26 @@ function BrowseContent() {
         {!loading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {poems.map((poem) => (
-              <div
+              <Link
                 key={poem.id}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-md transition-shadow"
+                href={`/detail?id=${poem.id}`}
+                className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-md hover:border-amber-300 dark:hover:border-amber-800 transition-all"
               >
-                <h3 className="font-semibold text-zinc-900 dark:text-white">
-                  {poem.title}
-                </h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-zinc-900 dark:text-white group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
+                    {poem.title}
+                  </h3>
+                  <span className="text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
+                    →
+                  </span>
+                </div>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                   {poem.author ?? "佚名"} · {poem.dynasty ?? "未知"} · {poem.type ?? "未知"}
                 </p>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-3 line-clamp-4 leading-relaxed">
                   {poem.content}
                 </p>
-              </div>
+              </Link>
             ))}
             {poems.length === 0 && (
               <div className="col-span-full text-center py-20 text-zinc-400 dark:text-zinc-600">

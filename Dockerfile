@@ -19,6 +19,8 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
+# CJK fonts for server-side poster PNG rendering
+RUN apk add --no-cache font-noto-cjk
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static

@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+----------
+海报 API app/api/v1/poster/route.ts → src/modules/poster/：
+1080×1920 竖版 SVG 构建（三主题配色/梅花/月亮/印章装饰）
+@napi-rs/canvas 服务端渲染 PNG（限流 10 req/min）
+响应含 svg + pngBase64，可直接用于小红书自动化上传脚本
