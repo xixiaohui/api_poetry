@@ -111,15 +111,18 @@ function escapeXml(value: string): string {
 function splitColumns(
   content: string,
   maxCharsPerCol: number,
-  maxCols: number,
+  maxColsTotal: number,
 ): string[][] {
   const lines = content
     .split(/\n+/)
     .map((l) => l.replace(/\s+/g, ""))
     .filter((l) => l.length > 0);
 
-  // 行数 ≤ 允许列数: 逐行排成竖列 (绝句/律诗, 保留行结构)
-  if (lines.length > 0 && lines.length <= maxCols) {
+  // 行数 ≤ 总列数上限（含作者列）时，逐行排成竖列（绝句/律诗保留行结构）。
+  // 每行独立占一列；若某行字数超过 maxCharsPerCol 则拆成多列。
+  // 关键：用 maxColsTotal（含作者列）而非正文列数判断，否则绝句 4 行 + 1 作者列
+  // 会被误判为"行数过多"而拍平，破坏"每行独立成列"。
+  if (lines.length > 0 && lines.length <= maxColsTotal) {
     const cols: string[][] = [];
     for (const line of lines) {
       const chars = [...line];
@@ -168,8 +171,8 @@ function computeContentLayout(
     const colStep = Math.max(1, Math.round(mid * COL_STEP_RATIO));
     const maxCharsPerCol = Math.max(3, Math.floor(availH / lineHeight));
     const maxColsTotal = Math.max(2, Math.floor(availW / colStep));
-    const maxCols = Math.max(1, maxColsTotal - authorCols);
-    const cols = splitColumns(content, maxCharsPerCol, maxCols);
+    // 传入 maxColsTotal（总列数上限，含作者列），让绝句/律诗按行独立成列
+    const cols = splitColumns(content, maxCharsPerCol, maxColsTotal);
     const totalCols = cols.length + authorCols;
     if (totalCols <= maxColsTotal) {
       fontSize = mid;
@@ -236,8 +239,10 @@ function renderColumn(
 }
 
 function renderSeal(): string {
-  // 经典方形朱文印："回"字边框 + "诗词"两字同字号同字体上下均分（白文），整体缩小一倍
-  return `<g transform="translate(912,158)">
+  // 经典方形朱文印："回"字边框 + "诗词"两字同字号同字体上下均分（白文），整体缩小一倍。
+  // 印章中心与标题文字中心对齐：标题中心在 TITLE_X，印章宽 60，故印章左缘 = TITLE_X - 30。
+  const sealX = TITLE_X - 30;
+  return `<g transform="translate(${sealX},158)">
     <rect width="60" height="60" rx="6" fill="#B23B2E" opacity="0.85"/>
     <rect x="3" y="3" width="54" height="54" rx="4" fill="none" stroke="#FDF6EA" stroke-width="1.5" opacity="0.8"/>
     <text x="30" y="25" font-size="26" font-family="${SEAL_FONT_FAMILY}" text-anchor="middle" fill="#FDF6EA" opacity="0.96">诗</text>
@@ -297,18 +302,18 @@ function renderPlum(): string {
 function renderMoon(): string {
   // 月亮移到右上角，避开正文区（x≤738）与标题主体；星星仅分布在边缘留白区
   const stars = [
-    [120, 90], [200, 150], [330, 90], [150, 200], [430, 70],
-    [640, 70], [90, 260], [300, 160], [500, 150], [760, 90],
-    [980, 120], [940, 70], [1010, 260], [80, 320],
+    [620, 90], [600, 150], [330, 90], [650, 200], [430, 70],
+    [640, 70], [790, 260], [300, 160], [500, 150], [760, 90],
+    [980, 120], [940, 70], [1010, 260], [680, 320],
   ]
     .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="#EDE6D6" opacity="0.4"/>`)
     .join("");
   return `<g>
-    <circle cx="870" cy="210" r="92" fill="#EDE6D6" opacity="0.09"/>
-    <circle cx="870" cy="210" r="65" fill="#F3E7C4" opacity="0.4"/>
-    <circle cx="858" cy="197" r="7" fill="#E6D6AC" opacity="0.5"/>
-    <circle cx="883" cy="231" r="4.5" fill="#E6D6AC" opacity="0.42"/>
-    <circle cx="866" cy="230" r="3" fill="#E6D6AC" opacity="0.48"/>
+    <circle cx="170" cy="210" r="92" fill="#EDE6D6" opacity="0.09"/>
+    <circle cx="170" cy="210" r="65" fill="#F3E7C4" opacity="0.4"/>
+    <circle cx="158" cy="197" r="7" fill="#E6D6AC" opacity="0.5"/>
+    <circle cx="183" cy="231" r="4.5" fill="#E6D6AC" opacity="0.42"/>
+    <circle cx="166" cy="230" r="3" fill="#E6D6AC" opacity="0.48"/>
     ${stars}
   </g>`;
 }
