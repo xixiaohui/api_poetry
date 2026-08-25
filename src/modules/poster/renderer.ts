@@ -83,14 +83,14 @@ const CONTENT_AREA_TOP = 280;
 const CONTENT_AREA_BOTTOM = 1150;
 const CONTENT_RIGHT = 738;
 const CONTENT_LEFT = 172;
-const BASE_FONT = 72;
+const BASE_FONT = 104;
 const TITLE_X = 876;
 /**
  * 列间距 = 字号 × COL_STEP_RATIO。
- * 1.4 倍：列间距 0.4 倍字号 ≈ 16px @ 39px 字号，避免列与列视觉粘连；
- * 同时绝句 4 列仍可达满字号 72。
+ * 1.32 倍：列间距 0.32 倍字号，列更紧凑，字号可更大；
+ * 绝句 4 列可达满字号 104，长词（173 字）也可达约 40px。
  */
-const COL_STEP_RATIO = 1.4;
+const COL_STEP_RATIO = 1.32;
 /**
  * 行高 = 字号 × LINE_HEIGHT_RATIO（竖排正文行距）。
  * 1.3 倍：CJK 字形 ascent+descent 约 1.1-1.2em，留出 0.1-0.2em 纯空白（合理疏密）。
@@ -154,9 +154,10 @@ function computeContentLayout(
   const availH = CONTENT_AREA_BOTTOM - CONTENT_AREA_TOP;
   const authorCols = hasAuthor ? 1 : 0;
 
-  // 列数是字号的单调函数（字号越大列越多）。二分查找满足布局约束的最大字号，
-  // 避免"从高到低一锤子砸到底"导致的过小字号（长词也不会低于 32，保证可读）。
-  let lo = 32;
+  // 列数是字号的单调函数（字号越大列越多）。二分查找满足布局约束的最大字号。
+  // lo 设为 16 留足下限（长词如 173 字会用到 20-40 号小字），保证二分总能找到合法解
+  // （之前设为 32/40 会让长词所有 mid 都 fail，导致 columns 为空、正文消失）。
+  let lo = 16;
   let hi = BASE_FONT;
   let fontSize = lo;
   let columns: string[][] = [];
@@ -304,7 +305,7 @@ function renderMoon(): string {
     .join("");
   return `<g>
     <circle cx="870" cy="210" r="92" fill="#EDE6D6" opacity="0.09"/>
-    <circle cx="870" cy="210" r="65" fill="#F3E7C4" opacity="0.8"/>
+    <circle cx="870" cy="210" r="65" fill="#F3E7C4" opacity="0.4"/>
     <circle cx="858" cy="197" r="7" fill="#E6D6AC" opacity="0.5"/>
     <circle cx="883" cy="231" r="4.5" fill="#E6D6AC" opacity="0.42"/>
     <circle cx="866" cy="230" r="3" fill="#E6D6AC" opacity="0.48"/>
@@ -322,8 +323,8 @@ function renderFooter(theme: ThemeConfig): string {
   const line2 = `x="540" y="1362" text-anchor="middle" font-size="22" font-family="${FONT_FAMILY}"`;
   return `<text ${line1} fill="none" stroke="${theme.halo}" stroke-width="3" stroke-linejoin="round" opacity="0.9">每日一诗 · 静水深流</text>
   <text ${line1} fill="${theme.footer}" opacity="0.9">每日一诗 · 静水深流</text>
-  <text ${line2} fill="none" stroke="${theme.halo}" stroke-width="2.5" stroke-linejoin="round" opacity="0.6">古诗词分享 · 传承经典</text>
-  <text ${line2} fill="${theme.footer}" opacity="0.6">古诗词分享 · 传承经典</text>`;
+  <text ${line2} fill="none" stroke="${theme.halo}" stroke-width="2.5" stroke-linejoin="round" opacity="0.6">微信小程序 · 国文之学</text>
+  <text ${line2} fill="${theme.footer}" opacity="0.6">微信小程序 · 国文之学</text>`;
 }
 
 function renderHeader(theme: ThemeConfig): string {
@@ -382,34 +383,33 @@ export function buildPosterSvg(
   });
   const titleEl = `${titleHalo.join("")}${titleFill.join("")}`;
 
-  // Content columns, right → left
+  // Content columns, right → left（统一居上对齐：所有列从 groupTopY 顶部开始）
   const xStart = layout.xStart;
-  const contentEls = layout.columns.map((column, i) => {
-    // 每列按自己字数垂直居中（短列向下偏移，使其字位置接近长列中部，避免顶部/底部留白不均）
-    const colTopY = groupTopY + Math.max(0, (contentHeight - colActualHeight(column.length)) / 2);
-    return renderColumn(
+  const contentEls = layout.columns.map((column, i) =>
+    renderColumn(
       column,
       xStart - i * layout.colStep,
-      colTopY,
+      groupTopY,
       layout.fontSize,
       layout.lineHeight,
       t.text,
       t.halo,
-    );
-  });
+    ),
+  );
 
-  // Author column (leftmost, smaller, vertically centered with content)
+  // Author column (leftmost, smaller, 居上对齐：与正文列同一起点 groupTopY)
   const authorFontSize = Math.round(layout.fontSize * 0.5);
   const authorLineHeight = Math.round(layout.lineHeight * 0.78);
   const authorLen = Math.max([...authorText].length, 1);
-  // 作者列实际高度（末字符字号 + 行距），用于精确垂直居中
-  const authorColHeight = (authorLen - 1) * authorLineHeight + authorFontSize;
-  const authorTopY = groupTopY + Math.max(0, (contentHeight - authorColHeight) / 2);
+  const authorTopY = groupTopY + Math.max(0, (contentHeight - colActualHeight(authorLen)) / 2);
+  // 作者列/天地印整体往左偏移量（相对诗文正文最左列）
+  const authorShiftLeft = 17;
+  const authorX = xStart - layout.columns.length * layout.colStep - authorShiftLeft;
   const authorEls =
     authorText.length > 0
       ? renderColumn(
           [...authorText],
-          xStart - layout.columns.length * layout.colStep,
+          authorX,
           authorTopY,
           authorFontSize,
           authorLineHeight,
@@ -426,7 +426,6 @@ export function buildPosterSvg(
   let sealAnchorBottomY: number;
   if (authorText.length > 0) {
     // 作者列末尾字 y = authorTopY + (authorLen - 1) * authorLineHeight + 字号补正
-    const authorX = xStart - layout.columns.length * layout.colStep;
     const authorBottomY = authorTopY + (authorLen - 1) * authorLineHeight;
     sealAnchorX = authorX;
     sealAnchorBottomY = authorBottomY;
@@ -436,10 +435,10 @@ export function buildPosterSvg(
       if (layout.columns[i].length > layout.columns[longestIdx].length) longestIdx = i;
     }
     const longestCol = layout.columns[longestIdx];
-    sealAnchorX = xStart - longestIdx * layout.colStep;
+    sealAnchorX = xStart - longestIdx * layout.colStep - authorShiftLeft;
     sealAnchorBottomY = groupTopY + (longestCol.length - 1) * layout.lineHeight;
   }
-  const endSealTopY = sealAnchorBottomY + layout.lineHeight * 0.5;
+  const endSealTopY = sealAnchorBottomY + layout.lineHeight * 0.5 + 57;
   const endSealEl = renderEndSeal(sealAnchorX - 22, endSealTopY, t.accent);
 
   // 滤镜只作用于背景/装饰/框架层，文字、印章保持原色 —— 无论选哪种滤镜，正文都清晰可读
