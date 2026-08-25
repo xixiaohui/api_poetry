@@ -9,12 +9,12 @@ import { renderSvgToPng } from "./png";
 
 const CACHE_TTL = 60 * 60 * 24; // 1 day
 
-function sourceCacheKey(source: PosterSource, theme: string): string {
+function sourceCacheKey(source: PosterSource, theme: string, filter: string): string {
   const hash = createHash("sha1")
     .update(`${source.poemId ?? ""}|${source.title}|${source.content}|${source.author ?? ""}|${source.dynasty ?? ""}`)
     .digest("hex")
     .slice(0, 16);
-  return `poetry:poster:${hash}:${theme}`;
+  return `poetry:poster:${hash}:${theme}:${filter}`;
 }
 
 function toFilename(value: string): string {
@@ -44,11 +44,11 @@ async function resolveSource(input: PosterInput): Promise<PosterSource> {
 export const posterService = {
   async generate(input: PosterInput): Promise<PosterResult> {
     const source = await resolveSource(input);
-    const key = sourceCacheKey(source, input.theme);
+    const key = sourceCacheKey(source, input.theme, input.filter);
 
     // SVG is small and cacheable; PNG is generated on demand so fresh fonts are always used.
     const cached = await cache.get<{ svg: string }>(key);
-    const svg = cached?.svg ?? buildPosterSvg(source, input.theme);
+    const svg = cached?.svg ?? buildPosterSvg(source, input.theme, input.filter);
     if (!cached) {
       await cache.set(key, { svg }, CACHE_TTL);
     }
@@ -61,13 +61,14 @@ export const posterService = {
       });
     }
 
-    const filename = `${toFilename(source.title)}_${input.theme}.png`;
+    const filename = `${toFilename(source.title)}_${input.theme}${input.filter !== "none" ? `_${input.filter}` : ""}.png`;
     return {
       svg,
       pngBase64,
       width: POSTER_WIDTH,
       height: POSTER_HEIGHT,
       theme: input.theme,
+      filter: input.filter,
       filename,
       title: source.title,
       author: source.author,

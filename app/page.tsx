@@ -189,7 +189,7 @@ export default function Home() {
               <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
                 {endpoints.map((ep) => (
                   <tr
-                    key={ep.path}
+                    key={`${ep.method}:${ep.path}`}
                     className="bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
                   >
                     <td className="px-5 py-3">

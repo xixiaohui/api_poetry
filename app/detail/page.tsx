@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -19,6 +19,7 @@ interface PosterResultDTO {
   readonly width: number;
   readonly height: number;
   readonly theme: string;
+  readonly filter?: string;
   readonly filename: string;
 }
 
@@ -26,6 +27,15 @@ const THEMES: ReadonlyArray<{ id: string; label: string; desc: string }> = [
   { id: "ink", label: "水墨", desc: "宣纸留白 · 远山淡影" },
   { id: "sunset", label: "落日", desc: "暖色纸笺 · 疏影横斜" },
   { id: "night", label: "夜月", desc: "深蓝夜空 · 明月星辉" },
+];
+
+const FILTERS: ReadonlyArray<{ id: string; label: string; desc: string }> = [
+  { id: "none", label: "原片", desc: "不加滤镜" },
+  { id: "sepia", label: "复古", desc: "泛黄怀旧" },
+  { id: "warm", label: "暖阳", desc: "温暖柔和" },
+  { id: "cool", label: "清冷", desc: "偏蓝清冽" },
+  { id: "gray", label: "黑白", desc: "素雅去色" },
+  { id: "vivid", label: "明艳", desc: "饱和鲜艳" },
 ];
 
 /** 将后端生成的 SVG 转换为 PNG Blob（浏览器本地渲染，与预览完全一致） */
@@ -76,10 +86,19 @@ function DetailContent() {
   // Poster state
   const [posterOpen, setPosterOpen] = useState(false);
   const [theme, setTheme] = useState("ink");
+  const [filter, setFilter] = useState("none");
   const [poster, setPoster] = useState<PosterResultDTO | null>(null);
   const [generating, setGenerating] = useState(false);
   const [posterError, setPosterError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+
+  // 预览优先复用服务端渲染的 PNG（与下载为同一张图，效果完全一致）；
+  // 仅当服务端未产出 PNG（如缺少中文字体）时回退浏览器渲染 SVG
+  const previewSrc = useMemo(() => {
+    if (!poster) return null;
+    if (poster.pngBase64) return `data:image/png;base64,${poster.pngBase64}`;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(poster.svg)}`;
+  }, [poster]);
 
   const fetchPoem = useCallback(async () => {
     setLoading(true);
@@ -104,49 +123,68 @@ function DetailContent() {
     fetchPoem();
   }, [fetchPoem]);
 
-  const handleGeneratePoster = useCallback(async (targetTheme: string) => {
-    if (!poem) return;
-    setGenerating(true);
-    setPosterError(null);
-    setPoster(null);
-    try {
-      const res = await fetch("/api/v1/poster", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          poemId: poem.id,
-          theme: targetTheme,
-          format: "both",
-        }),
-      });
-      const json = await res.json();
-      if (json.success) {
-        setPoster(json.data);
-      } else {
-        setPosterError(json.message ?? "生成失败");
+  const handleGeneratePoster = useCallback(
+    async (targetTheme: string, targetFilter: string) => {
+      if (!poem) return;
+      setGenerating(true);
+      setPosterError(null);
+      setPoster(null);
+      try {
+        const res = await fetch("/api/v1/poster", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            poemId: poem.id,
+            theme: targetTheme,
+            filter: targetFilter,
+            format: "both",
+          }),
+        });
+        const json = await res.json();
+        if (json.success) {
+          setPoster(json.data);
+        } else {
+          setPosterError(json.message ?? "生成失败");
+        }
+      } catch (e) {
+        setPosterError((e as Error).message);
+      } finally {
+        setGenerating(false);
       }
-    } catch (e) {
-      setPosterError((e as Error).message);
-    } finally {
-      setGenerating(false);
-    }
-  }, [poem]);
+    },
+    [poem],
+  );
 
   const handleOpenPoster = () => {
     setPosterOpen(true);
-    if (!poster) handleGeneratePoster(theme);
+    if (!poster) handleGeneratePoster(theme, filter);
   };
 
   const handleThemeChange = (next: string) => {
     setTheme(next);
-    handleGeneratePoster(next);
+    handleGeneratePoster(next, filter);
+  };
+
+  const handleFilterChange = (next: string) => {
+    setFilter(next);
+    handleGeneratePoster(theme, next);
   };
 
   const handleDownload = async () => {
     if (!poster) return;
     setDownloading(true);
     try {
-      const blob = await svgToPngBlob(poster.svg, poster.width, poster.height);
+      let blob: Blob;
+      if (poster.pngBase64) {
+        // 优先使用服务端渲染的高清 PNG（中文字体渲染正确）
+        const bin = atob(poster.pngBase64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        blob = new Blob([bytes], { type: "image/png" });
+      } else {
+        // 兜底：浏览器本地渲染 SVG → PNG
+        blob = await svgToPngBlob(poster.svg, poster.width, poster.height);
+      }
       triggerDownload(blob, poster.filename);
     } catch (e) {
       setPosterError((e as Error).message);
@@ -257,7 +295,7 @@ function DetailContent() {
 
               <div className="p-6">
                 {/* Theme selector */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-3">
                   {THEMES.map((t) => (
                     <button
                       key={t.id}
@@ -270,6 +308,25 @@ function DetailContent() {
                     >
                       <span className="font-medium">{t.label}</span>
                       <span className="block text-xs opacity-70 mt-0.5">{t.desc}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Filter selector */}
+                <div className="flex flex-wrap gap-2 mb-6 items-center">
+                  <span className="text-xs text-zinc-400 dark:text-zinc-500 mr-1">滤镜</span>
+                  {FILTERS.map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => handleFilterChange(f.id)}
+                      className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
+                        filter === f.id
+                          ? "bg-indigo-100 border-indigo-400 text-indigo-800 dark:bg-indigo-900/40 dark:border-indigo-600 dark:text-indigo-300"
+                          : "border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-indigo-400"
+                      }`}
+                      title={f.desc}
+                    >
+                      {f.label}
                     </button>
                   ))}
                 </div>
@@ -292,13 +349,25 @@ function DetailContent() {
                 {/* Preview + Download */}
                 {poster && !generating && (
                   <div className="flex flex-col md:flex-row gap-6 items-start">
-                    <div className="flex-1 w-full">
-                      <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                        <div
-                          className="mx-auto max-w-85 aspect-3/4 w-full"
-                          dangerouslySetInnerHTML={{ __html: poster.svg }}
-                        />
+                    <div className="flex-1 w-full min-w-0">
+                      <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden bg-zinc-100 dark:bg-zinc-800 shadow-inner">
+                        {previewSrc ? (
+                          // 海报 SVG 为后端生成的受信任内容，直接以 data URL 渲染
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={previewSrc}
+                            alt="诗词海报预览"
+                            className="w-full h-auto block"
+                          />
+                        ) : (
+                          <div className="aspect-3/4 w-full flex items-center justify-center text-sm text-zinc-400">
+                            正在加载预览...
+                          </div>
+                        )}
                       </div>
+                      <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center mt-2">
+                        {poster.width}×{poster.height} · 竖版海报，适配小红书 3:4
+                      </p>
                     </div>
                     <div className="md:w-64 w-full flex flex-col gap-3">
                       <button
@@ -306,11 +375,13 @@ function DetailContent() {
                         disabled={downloading}
                         className="rounded-xl bg-amber-600 px-5 py-3 text-white font-medium hover:bg-amber-700 transition-colors disabled:opacity-50"
                       >
-                        {downloading ? "生成中..." : "⬇ 下载 PNG"}
+                        {downloading ? "生成中..." : "⬇ 下载高清 PNG"}
                       </button>
                       <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                        PNG 为高清竖版海报，可直接用于小红书等平台发布。
-                        {poster.pngBase64 ? "服务端已同时返回 PNG（可用于自动化上传）。" : "服务端未配置中文字体，已由浏览器本地渲染。"}
+                        高清竖版海报（{poster.width}×{poster.height}），可直接用于小红书发布。
+                        {poster.pngBase64
+                          ? "服务端渲染输出，字体清晰无损。"
+                          : "浏览器本地渲染 PNG。"}
                       </p>
                     </div>
                   </div>

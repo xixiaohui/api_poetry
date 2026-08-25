@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { POSTER_THEMES } from "./types";
+import { POSTER_FILTERS, POSTER_THEMES } from "./types";
 
 export const posterSchema = z
   .object({
@@ -9,6 +9,7 @@ export const posterSchema = z
     author: z.string().trim().max(32).nullable().optional(),
     dynasty: z.string().trim().max(16).nullable().optional(),
     theme: z.enum(POSTER_THEMES).optional().default("ink"),
+    filter: z.enum(POSTER_FILTERS).optional().default("none"),
     format: z.enum(["svg", "png", "both"]).optional().default("both"),
   })
   .refine((d) => Boolean(d.poemId) || Boolean(d.title && d.content), {

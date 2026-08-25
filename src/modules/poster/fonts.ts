@@ -3,6 +3,21 @@ import { existsSync } from "node:fs";
 /** Alias used by the SVG so resvg / browser both render CJK glyphs. */
 export const FONT_ALIAS = "poster-serif";
 
+/**
+ * 印章书法字体别名。与 Windows 系统字体名 "KaiTi" 保持一致，
+ * 使浏览器与服务端 SVG 渲染都能命中同一款字体。
+ */
+export const SEAL_FONT_ALIAS = "KaiTi";
+
+/** 印章书法字体候选（楷体 → 华文楷体 → 华文隶书 → 华文行楷 → macOS 楷体） */
+const SEAL_FONT_CANDIDATES: readonly string[] = [
+  "C:\\Windows\\Fonts\\simkai.ttf",
+  "C:\\Windows\\Fonts\\STKAITI.TTF",
+  "C:\\Windows\\Fonts\\STLITI.TTF",
+  "C:\\Windows\\Fonts\\STXINGKA.TTF",
+  "/System/Library/Fonts/Supplemental/Kaiti.ttc",
+];
+
 /** Font discovery order — first existing path wins. */
 const FONT_CANDIDATES: readonly string[] = [
   // Windows
@@ -50,6 +65,19 @@ export async function ensureFontsRegistered(): Promise<boolean> {
       } catch (err) {
         console.warn(
           `[poster] failed to register ${candidate}: ${(err as Error).message}`,
+        );
+      }
+    }
+    // 印章书法字体（独立注册为 "KaiTi"，未发现时印章回退到已注册的正文衬线字体）
+    for (const candidate of SEAL_FONT_CANDIDATES) {
+      if (!existsSync(candidate)) continue;
+      try {
+        GlobalFonts.registerFromPath(candidate, SEAL_FONT_ALIAS);
+        console.log(`[poster] registered seal font: ${candidate}`);
+        break;
+      } catch (err) {
+        console.warn(
+          `[poster] failed to register seal font ${candidate}: ${(err as Error).message}`,
         );
       }
     }

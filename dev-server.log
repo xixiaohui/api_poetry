@@ -1,0 +1,745 @@
+
+> api_poetry@0.1.0 dev E:\workspace\claw\api_poetry
+> next dev
+
+▲ Next.js 16.2.11 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.7:3000
+- Environments: .env
+✓ Ready in 780ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of E:\workspace\claw\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * E:\workspace\claw\api_poetry\pnpm-lock.yaml
+
+Creating turbopack project { dir: 'E:\\workspace\\claw\\api_poetry', testMode: true }
+
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+[08:54:44.125] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/1 200 in 45s (next.js: 2.4s, proxy.ts: 240ms, application-code: 42s)
+[08:54:44.990] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/1"
+    [35mstatus[39m: 200
+    [35mduration[39m: 42105
+Redis incr error: Connection is closed.
+[08:58:47.735] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 3.2s (next.js: 147ms, proxy.ts: 17ms, application-code: 3.1s)
+[08:58:50.746] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3027
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 17ms (next.js: 4ms, proxy.ts: 5ms, application-code: 8ms)
+[08:58:50.777] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 35ms (next.js: 7ms, proxy.ts: 19ms, application-code: 9ms)
+[08:58:50.822] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 20ms (next.js: 4ms, proxy.ts: 7ms, application-code: 9ms)
+[08:59:27.518] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 64ms (next.js: 15ms, proxy.ts: 25ms, application-code: 25ms)
+[08:59:40.439] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 9
+Redis incr error: Connection is closed.
+[09:00:31.042] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1026ms (next.js: 4ms, proxy.ts: 6ms, application-code: 1017ms)
+[09:00:32.047] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1007
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis incr error: Connection is closed.
+[09:02:54.580] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 43s (next.js: 512ms, proxy.ts: 168ms, application-code: 42s)
+[09:02:55.808] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 42456
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 109ms (next.js: 17ms, proxy.ts: 42ms, application-code: 50ms)
+[09:02:55.899] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 72ms (next.js: 15ms, proxy.ts: 19ms, application-code: 38ms)
+[09:02:56.016] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 31
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 102ms (next.js: 20ms, proxy.ts: 55ms, application-code: 28ms)
+[09:02:56.120] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 7
+Redis incr error: Connection is closed.
+[09:06:56.318] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1750ms (next.js: 29ms, proxy.ts: 606ms, application-code: 1115ms)
+[09:06:57.422] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1106
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 145ms (next.js: 53ms, proxy.ts: 17ms, application-code: 76ms)
+[09:06:57.593] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 8
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 59ms (next.js: 19ms, proxy.ts: 21ms, application-code: 19ms)
+[09:06:57.709] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 10
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 16ms (next.js: 4ms, proxy.ts: 5ms, application-code: 8ms)
+[09:06:57.741] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 4
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis incr error: Connection is closed.
+[09:08:11.924] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 45s (next.js: 480ms, proxy.ts: 124ms, application-code: 44s)
+[09:08:14.884] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 44239
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 91ms (next.js: 33ms, proxy.ts: 25ms, application-code: 33ms)
+[09:08:14.991] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 7
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 110ms (next.js: 37ms, proxy.ts: 52ms, application-code: 20ms)
+[09:08:15.146] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 10
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 31ms (next.js: 11ms, proxy.ts: 12ms, application-code: 8ms)
+[09:08:15.203] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3
+ GET / 200 in 1847ms (next.js: 365ms, application-code: 1481ms)
+[browser] Encountered two children with the same key, `/api/v1/user/profile`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[browser] Encountered two children with the same key, `/api/v1/favorites`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[browser] Encountered two children with the same key, `/api/v1/history`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+ GET /browse 200 in 213ms (next.js: 42ms, application-code: 171ms)
+[09:08:25.651] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 823ms (next.js: 77ms, proxy.ts: 14ms, application-code: 732ms)
+[09:08:26.411] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 250ms (next.js: 7ms, proxy.ts: 5ms, application-code: 239ms)
+ GET /detail?id=1 200 in 113ms (next.js: 33ms, application-code: 80ms)
+[09:08:30.269] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/1 200 in 591ms (next.js: 91ms, proxy.ts: 21ms, application-code: 479ms)
+[09:08:30.736] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/1"
+    [35mstatus[39m: 200
+    [35mduration[39m: 468
+[09:08:30.759] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/1 200 in 329ms (next.js: 5ms, proxy.ts: 4ms, application-code: 319ms)
+[09:08:31.070] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/1"
+    [35mstatus[39m: 200
+    [35mduration[39m: 312
+[09:08:32.603] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 251ms (next.js: 7ms, proxy.ts: 12ms, application-code: 231ms)
+[09:08:32.849] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 244ms (next.js: 5ms, proxy.ts: 7ms, application-code: 232ms)
+ GET /detail?id=4 200 in 138ms (next.js: 5ms, application-code: 133ms)
+[09:08:35.032] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 728ms (next.js: 110ms, proxy.ts: 4ms, application-code: 614ms)
+[09:08:35.636] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 605
+[09:08:35.727] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 770ms (next.js: 7ms, proxy.ts: 44ms, application-code: 719ms)
+[09:08:36.433] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 706
+Redis incr error: Connection is closed.
+[09:08:37.632] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+[poster] registered CJK font: C:\Windows\Fonts\simsun.ttc
+ POST /api/v1/poster 200 in 2.5s (next.js: 26ms, proxy.ts: 17ms, application-code: 2.4s)
+[09:08:40.047] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2421
+ GET /browse 200 in 39ms (next.js: 3ms, application-code: 36ms)
+[09:09:14.911] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 455ms (next.js: 4ms, proxy.ts: 4ms, application-code: 446ms)
+[09:09:15.398] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 240ms (next.js: 9ms, proxy.ts: 5ms, application-code: 226ms)
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 47ms (next.js: 12ms, proxy.ts: 16ms, application-code: 19ms)
+[09:09:23.159] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 8
+ GET /browse 200 in 209ms (next.js: 65ms, application-code: 144ms)
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 42s (next.js: 354ms, proxy.ts: 73ms, application-code: 41s)
+[09:10:28.126] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 41222
+ GET /detail?id=4 200 in 80ms (next.js: 15ms, application-code: 65ms)
+[09:10:57.387] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 1020ms (next.js: 187ms, proxy.ts: 28ms, application-code: 806ms)
+[09:10:58.185] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 800
+[09:10:58.206] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 638ms (next.js: 5ms, proxy.ts: 4ms, application-code: 629ms)
+[09:10:58.830] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 625
+Redis incr error: Connection is closed.
+[09:10:59.703] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+[poster] registered CJK font: C:\Windows\Fonts\simsun.ttc
+ POST /api/v1/poster 200 in 2.4s (next.js: 8ms, proxy.ts: 26ms, application-code: 2.4s)
+[09:11:02.082] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2384
+Redis incr error: Connection is closed.
+[09:11:03.431] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.6s (next.js: 9ms, proxy.ts: 21ms, application-code: 2.5s)
+[09:11:05.951] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2522
+Redis incr error: Connection is closed.
+[09:11:14.734] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 3.7s (next.js: 17ms, proxy.ts: 696ms, application-code: 3.0s)
+[09:11:17.745] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3012
+Redis incr error: Connection is closed.
+[09:12:10.345] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.5s (next.js: 12ms, proxy.ts: 19ms, application-code: 2.5s)
+[09:12:12.837] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2498
+ GET /detail?id=4 200 in 436ms (next.js: 126ms, application-code: 310ms)
+ GET /detail?id=4 200 in 596ms (next.js: 154ms, application-code: 442ms)
+ GET /detail?id=4 200 in 552ms (next.js: 93ms, application-code: 459ms)
+ GET /detail?id=4 200 in 187ms (next.js: 8ms, application-code: 179ms)
+ GET /detail?id=4 200 in 160ms (next.js: 8ms, application-code: 152ms)
+ GET /detail?id=4 200 in 61ms (next.js: 4ms, application-code: 58ms)
+ GET /detail?id=4 200 in 205ms (next.js: 4ms, application-code: 201ms)
+ GET /detail?id=4 200 in 149ms (next.js: 13ms, application-code: 136ms)
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 48s (next.js: 447ms, proxy.ts: 152ms, application-code: 47s)
+[09:41:59.639] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 47278
+    error: "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 14ms (next.js: 4ms, proxy.ts: 5ms, application-code: 5ms)
+[09:41:59.848] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 1
+    error: "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 14ms (next.js: 3ms, proxy.ts: 5ms, application-code: 6ms)
+[09:41:59.924] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 2
+    error: "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 53ms (next.js: 17ms, proxy.ts: 18ms, application-code: 18ms)
+[09:43:33.658] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 5
+    error: "Expected ',' or '}' after property value in JSON at position 17 (line 1 column 18)"
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 14ms (next.js: 3ms, proxy.ts: 4ms, application-code: 7ms)
+[09:43:33.893] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 2
+    error: "Expected ',' or '}' after property value in JSON at position 17 (line 1 column 18)"
+Redis incr error: Connection is closed.
+ POST /api/v1/poster 500 in 13ms (next.js: 3ms, proxy.ts: 4ms, application-code: 6ms)
+[09:43:33.959] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 1
+    error: "Expected ',' or '}' after property value in JSON at position 17 (line 1 column 18)"
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+[poster] registered CJK font: C:\Windows\Fonts\simsun.ttc
+ POST /api/v1/poster 200 in 1686ms (next.js: 11ms, proxy.ts: 12ms, application-code: 1663ms)
+[09:44:35.145] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1650
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1783ms (next.js: 10ms, proxy.ts: 17ms, application-code: 1756ms)
+[09:44:37.562] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1746
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1931ms (next.js: 9ms, proxy.ts: 135ms, application-code: 1787ms)
+[09:44:40.009] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1752
+ GET /detail?id=4 200 in 707ms (next.js: 12ms, application-code: 694ms)
+[09:45:59.494] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 1237ms (next.js: 212ms, proxy.ts: 9ms, application-code: 1016ms)
+[09:46:00.502] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1009
+Redis incr error: Connection is closed.
+[09:46:01.949] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.4s (next.js: 14ms, proxy.ts: 14ms, application-code: 2.3s)
+[09:46:04.244] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2306
+Redis incr error: Connection is closed.
+[09:46:22.535] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.7s (next.js: 13ms, proxy.ts: 17ms, application-code: 2.7s)
+[09:46:25.200] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2667
+Redis incr error: Connection is closed.
+[09:46:29.009] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+ POST /api/v1/poster 500 in 24.4s (next.js: 132ms, proxy.ts: 164ms, application-code: 24.1s)
+[09:46:53.041] [31mERROR[39m (12452): [36munhandled error[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mduration[39m: 24038
+    error: "The operation was aborted due to timeout"
+ GET /browse 200 in 1998ms (next.js: 365ms, application-code: 1633ms)
+ GET /browse 200 in 371ms (next.js: 296ms, application-code: 75ms)
+ GET /detail?id=4 200 in 5.6s (next.js: 298ms, application-code: 5.3s)
+[09:47:00.166] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/4 200 in 1083ms (next.js: 88ms, proxy.ts: 25ms, application-code: 970ms)
+[09:47:01.132] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/4"
+    [35mstatus[39m: 200
+    [35mduration[39m: 966
+ GET /browse 200 in 41ms (next.js: 3ms, application-code: 38ms)
+[09:47:01.769] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 612ms (next.js: 72ms, proxy.ts: 16ms, application-code: 524ms)
+[09:47:02.345] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 282ms (next.js: 9ms, proxy.ts: 29ms, application-code: 244ms)
+ GET /browse?type=%E5%AE%8B%E8%AF%8D&page=1 200 in 121ms (next.js: 15ms, application-code: 107ms)
+[09:47:04.675] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15&type=%E5%AE%8B%E8%AF%8D"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15&type=%E5%AE%8B%E8%AF%8D 200 in 300ms (next.js: 19ms, proxy.ts: 16ms, application-code: 265ms)
+ GET /detail?id=503 200 in 52ms (next.js: 6ms, application-code: 46ms)
+[09:47:10.351] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 1008ms (next.js: 31ms, proxy.ts: 4ms, application-code: 974ms)
+[09:47:11.320] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 969
+[09:47:11.351] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 487ms (next.js: 6ms, proxy.ts: 6ms, application-code: 475ms)
+[09:47:11.821] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 470
+[09:47:13.943] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15&type=%E5%AE%8B%E8%AF%8D"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15&type=%E5%AE%8B%E8%AF%8D 200 in 274ms (next.js: 14ms, proxy.ts: 18ms, application-code: 243ms)
+[09:47:14.188] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15&type=%E5%AE%8B%E8%AF%8D"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15&type=%E5%AE%8B%E8%AF%8D 200 in 236ms (next.js: 3ms, proxy.ts: 4ms, application-code: 229ms)
+ GET /detail?id=503 200 in 87ms (next.js: 8ms, application-code: 79ms)
+[09:47:19.791] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 1181ms (next.js: 54ms, proxy.ts: 19ms, application-code: 1108ms)
+[09:47:20.896] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1105
+[09:47:20.943] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 591ms (next.js: 10ms, proxy.ts: 5ms, application-code: 576ms)
+[09:47:21.507] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 565
+Redis incr error: Connection is closed.
+[09:47:23.097] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1985ms (next.js: 12ms, proxy.ts: 17ms, application-code: 1957ms)
+[09:47:25.026] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1936
+Redis incr error: Connection is closed.
+[09:47:36.878] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 3.0s (next.js: 14ms, proxy.ts: 12ms, application-code: 3.0s)
+[09:47:39.812] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2939
+Redis incr error: Connection is closed.
+[09:47:51.282] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 3.2s (next.js: 13ms, proxy.ts: 17ms, application-code: 3.1s)
+[09:47:54.383] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 3106
+Redis incr error: Connection is closed.
+[09:48:20.380] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.9s (next.js: 16ms, proxy.ts: 18ms, application-code: 2.8s)
+[09:48:23.184] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2815
+Redis incr error: Connection is closed.
+[09:48:25.017] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1880ms (next.js: 13ms, proxy.ts: 8ms, application-code: 1859ms)
+[09:48:26.849] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1845
+ GET /detail?id=503 200 in 414ms (next.js: 155ms, application-code: 259ms)
+ GET /detail?id=503 200 in 331ms (next.js: 120ms, application-code: 211ms)
+ GET /detail?id=503 200 in 584ms (next.js: 136ms, application-code: 448ms)
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+[poster] registered CJK font: C:\Windows\Fonts\simsun.ttc
+[poster] registered seal font: C:\Windows\Fonts\simkai.ttf
+ POST /api/v1/poster 200 in 43s (next.js: 357ms, proxy.ts: 77ms, application-code: 43s)
+[09:55:47.288] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 42741
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.0s (next.js: 12ms, proxy.ts: 35ms, application-code: 1984ms)
+[09:55:50.575] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1970
+Redis incr error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1776ms (next.js: 7ms, proxy.ts: 27ms, application-code: 1742ms)
+[09:55:53.088] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1730
+ GET /detail?id=503 200 in 331ms (next.js: 4ms, application-code: 327ms)
+[09:56:26.462] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 2.7s (next.js: 204ms, proxy.ts: 17ms, application-code: 2.5s)
+[09:56:28.932] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2471
+Redis incr error: Connection is closed.
+[09:56:30.665] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 1933ms (next.js: 4ms, proxy.ts: 14ms, application-code: 1915ms)
+[09:56:32.557] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 1896
+Redis incr error: Connection is closed.
+[09:56:46.564] [32mINFO[39m (12452): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+Redis set error: Connection is closed.
+Redis set error: Connection is closed.
+ POST /api/v1/poster 200 in 2.7s (next.js: 19ms, proxy.ts: 25ms, application-code: 2.6s)
+⚠ Server is approaching the used memory threshold, restarting...
+[09:56:49.183] [32mINFO[39m (12452): [36mrequest completed[39m
+    [35mmethod[39m: "POST"
+    [35mpath[39m: "/api/v1/poster"
+    [35mstatus[39m: 200
+    [35mduration[39m: 2628
+▲ Next.js 16.2.11 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.7:3000
+- Environments: .env
+✓ Ready in 416ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of E:\workspace\claw\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * E:\workspace\claw\api_poetry\pnpm-lock.yaml
+
+Creating turbopack project { dir: 'E:\\workspace\\claw\\api_poetry', testMode: true }
+
+ GET /detail?id=503 200 in 1838ms (next.js: 793ms, application-code: 1044ms)
+Redis connection error: connect ETIMEDOUT
+ GET /api/v1/poems/503 200 in 16.2s (next.js: 1853ms, proxy.ts: 96ms, application-code: 14.2s)
+ GET /detail?id=503 200 in 422ms (next.js: 3ms, application-code: 418ms)
+Redis connection error: connect ETIMEDOUT
+Redis connection error: connect ETIMEDOUT
+ GET /api/v1/poems/503 200 in 20.2s (next.js: 80ms, proxy.ts: 41ms, application-code: 20.1s)
+ GET /detail?id=503 200 in 456ms (next.js: 9ms, application-code: 446ms)
+ GET /api/v1/poems/503 200 in 2.9s (next.js: 89ms, proxy.ts: 39ms, application-code: 2.7s)
+ GET /detail?id=503 200 in 417ms (next.js: 7ms, application-code: 409ms)
+ GET /browse 200 in 184ms (next.js: 46ms, application-code: 138ms)
+Redis connection error: connect ETIMEDOUT
+[09:57:37.180] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+[09:57:37.188] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+[09:57:37.192] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+[09:57:37.194] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=6&page_size=100"
+[09:57:37.196] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 2.6s (next.js: 68ms, proxy.ts: 16ms, application-code: 2.5s)
+[09:57:37.964] [32mINFO[39m (15960): [36mChinese Poetry API request[39m
+    [35murl[39m: "http://108.61.73.169:1279/api/v1/poems?page=1&page_size=15"
+Redis set error: Connection is closed.
+ GET /api/v1/poems/503 200 in 4.3s (next.js: 28ms, proxy.ts: 6ms, application-code: 4.3s)
+[09:57:38.112] [32mINFO[39m (15960): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 4303
+Redis set error: Connection is closed.
+[09:57:38.273] [32mINFO[39m (15960): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 7414
+Redis set error: Connection is closed.
+[09:57:38.292] [32mINFO[39m (15960): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 27845
+Redis set error: Connection is closed.
+[09:57:38.367] [32mINFO[39m (15960): [36mrequest completed[39m
+    [35mmethod[39m: "GET"
+    [35mpath[39m: "/api/v1/poems/503"
+    [35mstatus[39m: 200
+    [35mduration[39m: 42440
+Redis set error: Connection is closed.
+ GET /api/v1/poems?page=1&pageSize=15 200 in 1787ms (next.js: 3ms, proxy.ts: 4ms, application-code: 1779ms)
+[?25h
+ ELIFECYCLE  Command failed with exit code 1.
