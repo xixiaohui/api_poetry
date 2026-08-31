@@ -327,9 +327,7 @@ function renderFooter(theme: ThemeConfig): string {
   const line1 = `x="540" y="1320" text-anchor="middle" font-size="27" font-family="${FONT_FAMILY}"`;
   const line2 = `x="540" y="1362" text-anchor="middle" font-size="22" font-family="${FONT_FAMILY}"`;
   return `<text ${line1} fill="none" stroke="${theme.halo}" stroke-width="3" stroke-linejoin="round" opacity="0.9">每日一诗 · 静水深流</text>
-  <text ${line1} fill="${theme.footer}" opacity="0.9">每日一诗 · 静水深流</text>
-  <text ${line2} fill="none" stroke="${theme.halo}" stroke-width="2.5" stroke-linejoin="round" opacity="0.6">微信小程序 · 国文之学</text>
-  <text ${line2} fill="${theme.footer}" opacity="0.6">微信小程序 · 国文之学</text>`;
+  <text ${line1} fill="${theme.footer}" opacity="0.9">每日一诗 · 静水深流</text>`;
 }
 
 function renderHeader(theme: ThemeConfig): string {
