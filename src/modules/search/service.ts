@@ -8,7 +8,7 @@ export const searchService = {
   async search(q: string, type = "all", page = 1, pageSize = 20): Promise<SearchResultDTO> {
     if (!q.trim()) throw new ValidationError("搜索词不能为空");
 
-    const cacheKey = `poetry:search:${q}:${type}:${page}:${pageSize}`;
+    const cacheKey = `poetry:search:v2:${q}:${type}:${page}:${pageSize}`;
     const cached = await cache.get<SearchResultDTO>(cacheKey);
     if (cached) return cached;
 

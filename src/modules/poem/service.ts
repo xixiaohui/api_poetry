@@ -11,7 +11,7 @@ const CACHE_POEM_LIST_TTL = 120;
 export const poemService = {
   async list(params: PoemListParams): Promise<PoemListDTO> {
     const { page = 1, pageSize = 20 } = params;
-    const cacheKey = `poetry:poems:${page}:${pageSize}:${params.dynasty ?? ""}:${params.type ?? ""}:${params.author ?? ""}`;
+    const cacheKey = `poetry:poems:v2:${page}:${pageSize}:${params.dynasty ?? ""}:${params.type ?? ""}:${params.author ?? ""}`;
     const cached = await cache.get<PoemListDTO>(cacheKey);
     if (cached) return cached;
 

@@ -2,7 +2,8 @@
 
 import { Suspense, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Pagination } from "@/components/pagination";
 
 interface PoemDTO {
   readonly id: number;
@@ -15,13 +16,20 @@ interface PoemDTO {
 
 const DYNASTIES = ["唐", "宋", "元", "明", "清", "先秦", "南北朝", "五代"];
 const TYPES = ["五言绝句", "七言绝句", "五言律诗", "七言律诗", "乐府诗", "宋词", "元曲"];
+const PAGE_SIZES = [10, 15, 30, 50];
+const DEFAULT_PAGE_SIZE = 15;
 
 function BrowseContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const dynasty = searchParams.get("dynasty") ?? "";
   const type = searchParams.get("type") ?? "";
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+  const pageSize = Math.min(
+    100,
+    Math.max(1, parseInt(searchParams.get("pageSize") ?? String(DEFAULT_PAGE_SIZE), 10) || DEFAULT_PAGE_SIZE)
+  );
 
   const [poems, setPoems] = useState<PoemDTO[]>([]);
   const [total, setTotal] = useState(0);
@@ -34,7 +42,7 @@ function BrowseContent() {
     try {
       const params = new URLSearchParams();
       params.set("page", page.toString());
-      params.set("pageSize", "15");
+      params.set("pageSize", pageSize.toString());
       if (dynasty) params.set("dynasty", dynasty);
       if (type) params.set("type", type);
 
@@ -51,14 +59,23 @@ function BrowseContent() {
     } finally {
       setLoading(false);
     }
-  }, [page, dynasty, type]);
+  }, [page, pageSize, dynasty, type]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
     fetchPoems();
   }, [fetchPoems]);
 
-  const totalPages = Math.ceil(total / 15);
+  const totalPages = Math.ceil(total / pageSize);
+
+  // 当前页超出总页数（如筛选后数据变少）时自动回到最后一页
+  useEffect(() => {
+    if (totalPages > 0 && page > totalPages) {
+      const p = new URLSearchParams(searchParams.toString());
+      p.set("page", totalPages.toString());
+      router.replace(`/browse?${p.toString()}`);
+    }
+  }, [totalPages, page, searchParams, router]);
 
   const buildUrl = (overrides: Record<string, string>) => {
     const p = new URLSearchParams(searchParams.toString());
@@ -173,25 +190,32 @@ function BrowseContent() {
         )}
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 mt-10">
-            {page > 1 && (
-              <Link
-                href={buildUrl({ page: (page - 1).toString() })}
-                className="text-sm px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+        {totalPages > 0 && (
+          <div className="flex flex-col items-center gap-3 mt-10">
+            <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+              <span>共 {total.toLocaleString()} 首 · 每页</span>
+              <select
+                value={pageSize}
+                onChange={(e) =>
+                  router.push(buildUrl({ pageSize: e.target.value, page: "1" }))
+                }
+                className="h-9 px-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent text-sm text-zinc-700 dark:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                aria-label="每页条数"
               >
-                ← 上一页
-              </Link>
-            )}
-            <span className="text-sm text-zinc-500">{page} / {totalPages}</span>
-            {page < totalPages && (
-              <Link
-                href={buildUrl({ page: (page + 1).toString() })}
-                className="text-sm px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              >
-                下一页 →
-              </Link>
-            )}
+                {PAGE_SIZES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+              <span>条</span>
+            </div>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              buildHref={(p) => buildUrl({ page: p.toString() })}
+              onJump={(p) => router.push(buildUrl({ page: p.toString() }))}
+            />
           </div>
         )}
       </div>

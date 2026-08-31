@@ -63,9 +63,38 @@ export interface PaginatedResponse<T> {
   readonly pageSize: number;
 }
 
+/** 上游分页响应：数据在 data，分页信息在 pagination */
+interface UpstreamPagination {
+  readonly page: number;
+  readonly page_size: number;
+  readonly total: number;
+  readonly total_pages: number;
+}
+
+interface UpstreamPaginatedResponse<T> {
+  readonly data: T[];
+  readonly pagination?: UpstreamPagination;
+}
+
+/** 请求上游分页接口并将 { data, pagination } 规范化为 PaginatedResponse */
+async function getPaginated<T>(
+  path: string,
+  params?: Record<string, string | undefined>
+): Promise<PaginatedResponse<T>> {
+  const raw = await get<UpstreamPaginatedResponse<T>>(path, params);
+  const items = Array.isArray(raw?.data) ? raw.data : [];
+  const pagination = raw?.pagination;
+  return {
+    data: items,
+    total: pagination?.total ?? items.length,
+    page: pagination?.page ?? 1,
+    pageSize: pagination?.page_size ?? items.length,
+  };
+}
+
 export const chinesePoetryClient = {
   getPoems(params: { page?: number; pageSize?: number; dynasty?: string; type?: string; author?: string }): Promise<PaginatedResponse<UpstreamPoem>> {
-    return get<PaginatedResponse<UpstreamPoem>>("/poems", {
+    return getPaginated<UpstreamPoem>("/poems", {
       page: params.page?.toString(),
       page_size: params.pageSize?.toString(),
       dynasty: params.dynasty,
@@ -84,7 +113,7 @@ export const chinesePoetryClient = {
     let page = Math.max(1, Math.ceil(id / PAGE_SIZE));
 
     for (let attempt = 0; attempt < 6; attempt++) {
-      const result = await get<PaginatedResponse<UpstreamPoem>>("/poems", {
+      const result = await getPaginated<UpstreamPoem>("/poems", {
         page: page.toString(),
         page_size: PAGE_SIZE.toString(),
       });
@@ -120,7 +149,7 @@ export const chinesePoetryClient = {
   },
 
   searchPoems(params: { q: string; type?: string; page?: number; pageSize?: number }): Promise<PaginatedResponse<UpstreamPoem>> {
-    return get<PaginatedResponse<UpstreamPoem>>("/poems/search", {
+    return getPaginated<UpstreamPoem>("/poems/search", {
       q: params.q,
       type: params.type,
       page: params.page?.toString(),
@@ -129,7 +158,7 @@ export const chinesePoetryClient = {
   },
 
   getAuthors(params: { page?: number; pageSize?: number }): Promise<PaginatedResponse<UpstreamAuthor>> {
-    return get<PaginatedResponse<UpstreamAuthor>>("/authors", {
+    return getPaginated<UpstreamAuthor>("/authors", {
       page: params.page?.toString(),
       page_size: params.pageSize?.toString(),
     });

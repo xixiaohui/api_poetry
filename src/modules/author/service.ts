@@ -9,7 +9,7 @@ const CACHE_TTL = 600;
 
 export const authorService = {
   async list(page = 1, pageSize = 20): Promise<AuthorListDTO> {
-    const cacheKey = `poetry:authors:${page}:${pageSize}`;
+    const cacheKey = `poetry:authors:v2:${page}:${pageSize}`;
     const cached = await cache.get<AuthorListDTO>(cacheKey);
     if (cached) return cached;
 
