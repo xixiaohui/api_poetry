@@ -64,6 +64,7 @@ export function Footer() {
                 { href: "/docs#诗词接口", label: "诗词接口" },
                 { href: "/docs#作者接口", label: "作者接口" },
                 { href: "/docs#搜索接口", label: "搜索接口" },
+                { href: "/docs#海报接口", label: "海报接口" },
                 { href: "/docs#AI 接口 🔒", label: "AI 接口" },
               ].map((link) => (
                 <li key={link.href}>

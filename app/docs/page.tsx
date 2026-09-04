@@ -230,6 +230,44 @@ const sections: { title: string; endpoints: EndpointDoc[] }[] = [
     ],
   },
   {
+    title: "海报接口",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/api/v1/poster",
+        desc: "生成诗词海报 — 服务端渲染 1080×1440 竖版海报，返回 SVG 与 PNG（10 次/分钟限流）",
+        params: [
+          { name: "poemId", type: "number", desc: "诗词 ID（正整数，与 title+content 二选一，提供时优先并按库中内容生成）" },
+          { name: "title", type: "string", desc: "标题 1-64 字（自定内容时与 content 同时必填）" },
+          { name: "content", type: "string", desc: "正文 1-5000 字（自定内容时必填）" },
+          { name: "author", type: "string", desc: "作者，≤32 字（可空）" },
+          { name: "dynasty", type: "string", desc: "朝代，≤16 字（可空）" },
+          { name: "theme", type: "enum", desc: "主题：ink 水墨 / sunset 落日 / night 夜月，默认 ink" },
+          { name: "filter", type: "enum", desc: "滤镜：none 原片 / sepia 复古 / warm 暖阳 / cool 清冷 / gray 黑白 / vivid 明艳，默认 none" },
+          { name: "format", type: "enum", desc: "返回格式：svg / png / both，默认 both" },
+        ],
+        example: `curl -X POST /api/v1/poster \\
+  -H "Content-Type: application/json" \\
+  -d '{"poemId":1,"theme":"night","filter":"warm","format":"both"}'`,
+        responseExample: `{
+  "success": true,
+  "data": {
+    "svg": "<svg width=\"1080\" height=\"1440\" ...>...</svg>",
+    "pngBase64": "iVBORw0KGgo...（纯 base64 字符串；format 为 png/both 且服务端存在中文字体时返回）",
+    "width": 1080,
+    "height": 1440,
+    "theme": "night",
+    "filter": "warm",
+    "filename": "静夜思_night_warm.png",
+    "title": "静夜思",
+    "author": "李白",
+    "dynasty": "唐"
+  }
+}`,
+      },
+    ],
+  },
+  {
     title: "AI 接口 🔒",
     endpoints: [
       {
